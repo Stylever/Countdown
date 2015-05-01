@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>countdown-rotate</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.countdown-rotate {
+				position: relative;
+				margin: 100px auto;
+				width: 200px;
+				height: 200px;
+				border-radius: 50%;
+				background-color: #ccffff;
+			}
+			.rect {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 200px;
+				height: 200px;
+				border-radius: 50%;
+			}
+			.clip {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 200px;
+				height: 200px;
+				border-radius: 50%;
+				background-color: #00b38a;
+
+			}
+			.clip-left {
+				clip: rect(0px 100px 200px 0px);
+			}
+			.clip-right {
+				clip: rect(0px 200px 200px 100px);
+			}
+			#secondsDiv {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin: -90px 0 0 -90px;
+				width: 180px;
+				height: 180px;
+				font-size: 40px;
+				color: #00b38a;
+				text-align: center;
+				line-height: 180px;
+				border-radius: 50%;
+				background-color: #ffffff;
+			}
+		</style>
+	</head>
+	<body>
+		<section class="countdown-rotate">
+			<div class="rect clip-left" >
+				<div id="countdown-left" class="clip clip-left"></div>
+			</div>
+			<div class="rect clip-right">
+				<div id="countdown-right" class="clip clip-right"></div>
+			</div>
+			<div id="secondsDiv">120</div>
+		</section>
+
+		<script type="text/javascript">
+			var countdown = {
+				totalSeconds: 120,
+				countdownDiv: document.getElementById("secondsDiv"),
+				clip1: document.getElementById("countdown-left"),
+				clip2: document.getElementById("countdown-right"),
+				rotateFun: function (seconds) {
+					var degree = 0;
+					if (countdown.totalSeconds / 2 <= seconds) { // 左侧旋转
+						degree = (countdown.totalSeconds - seconds) * 180 / (countdown.totalSeconds / 2);
+
+						countdown.clip1.style.webkitTransform = 'rotate(-' + degree + 'deg)';
+						countdown.clip1.style.MozTransform = 'rotate(-' + degree + 'deg)';
+						countdown.clip1.style.msTransform = 'rotate(-' + degree + 'deg)';
+						countdown.clip1.style.transform = 'rotate(-' + degree + 'deg)';
+					} else { // 右侧旋转
+						degree = (seconds - countdown.totalSeconds / 2) * 360 / countdown.totalSeconds ;
+
+						countdown.clip2.style.webkitTransform = 'rotate(' + degree + 'deg)';
+						countdown.clip2.style.MozTransform = 'rotate(' + degree + 'deg)';
+						countdown.clip2.style.msTransform = 'rotate(' + degree + 'deg)';
+						countdown.clip2.style.transform = 'rotate(' + degree + 'deg)';
+					}
+				},
+				countdownFun: function (seconds) {
+					if (seconds >= 0) {
+						countdown.timeout = setTimeout( function () {
+							countdown.rotateFun(seconds);
+							countdown.countdownDiv.innerHTML = seconds;
+							countdown.countdownFun(seconds - 1);
+						}, 1000);
+					}
+				},
+				init: function () {
+					countdown.countdownFun(countdown.totalSeconds - 1);
+				}
+			};
+			countdown.init();
+		</script>
+	</body>
+</html>
