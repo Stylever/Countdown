@@ -1,0 +1,47 @@
+@charset "utf-8";
+.countdown-rotate {
+	position: relative;
+	margin: 100px auto;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	background-color: #ccffff;
+}
+.rect {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+}
+.clip {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	background-color: #00b38a;
+
+}
+.clip-left {
+	clip: rect(0px 100px 200px 0px);
+}
+.clip-right {
+	clip: rect(0px 200px 200px 100px);
+}
+#secondsDiv {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -90px 0 0 -90px;
+	width: 180px;
+	height: 180px;
+	font-size: 40px;
+	color: #00b38a;
+	text-align: center;
+	line-height: 180px;
+	border-radius: 50%;
+	background-color: #ffffff;
+}

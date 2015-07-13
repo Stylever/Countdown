@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+.countdown-canvas {
+	position: relative;
+	margin: 0 auto;
+	width: 400px;
+}
+#secondsDiv {
+	position: absolute;
+	top: 176px;
+	left: 148px;
+	width: 100px;
+	height: 100px;
+	font-size: 40px;
+	color: #00b38a;
+	text-align: center;
+}
